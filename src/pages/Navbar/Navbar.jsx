@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const Navbar = () => {
+
+
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleSignOut = () => {
+        logOut()
+            .then()
+            .catch()
+    }
 
     const Navlinks = <>
         <li><NavLink to='/'>Home</NavLink></li>
@@ -9,8 +19,8 @@ const Navbar = () => {
         <li><NavLink to='/career'>Career</NavLink></li>
     </>
     return (
-        <div>
-            <div className="navbar bg-base-100">
+        <div className='px-10'>
+            <div className="navbar bg-base-100 items-center">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -20,7 +30,7 @@ const Navbar = () => {
                             {Navlinks}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">SocialEvents</a>
+                    <img className='h-[100px] w-[280px]' src="https://i.ibb.co/h1BK0Vq/Screenshot-82.png" alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal ">
@@ -33,11 +43,14 @@ const Navbar = () => {
                             <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                         </div>
                     </label>
-                  <Link to ='/login'> 
-                    <a className="btn">Login</a>
-                   
-                  </Link>
-                  <a className="btn">Register</a>
+                    {
+                    user ?
+                        <button onClick={handleSignOut} className="btn">Sign Out</button>
+                        :
+                        <Link to="/login">
+                            <button className="btn">Login</button>
+                        </Link>
+                }
                 </div>
             </div>
         </div>

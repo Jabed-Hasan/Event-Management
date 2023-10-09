@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "title": "Concerts and Music Festivals",
+        "description": "Experience the thrill of live music with our exciting concerts and music festivals. Enjoy performances by top artists and bands from various genres. Dance the night away and create unforgettable memories.",
+        "image": "https://i.ibb.co/rmtxwp4/Screenshot-72.png",
+        "organizer": "EventCorp",
+        "rating": 4.8
+    },
+    {
+        "id": 2,
+        "title": "Theater and Performing Arts",
+        "description": "Immerse yourself in the world of theater and performing arts. Witness captivating plays, dance performances, and more by talented artists. Explore the rich tapestry of storytelling through live performances. ",
+        "image": "https://i.ibb.co/ky5dGv0/Screenshot-73.png",
+        "organizer": "Artistic Productions",
+        "rating": 4.7
+    },
+    {
+        "id": 3,
+        "title": "Film Screenings and Premieres",
+        "description": "Be the first to see the latest blockbuster movies and independent films at our exclusive screenings and premieres. A cinematic experience like no other. Dive into the world of storytelling on the big screen.",
+        "image": "https://i.ibb.co/1GKNmpd/Screenshot-74.png",
+        "organizer": "CineFest",
+        "rating": 4.9
+    },
+    {
+        "id": 4,
+        "title": "Comedy Shows",
+        "description": "Laugh your heart out at our hilarious comedy shows. Enjoy stand-up comedy, improv, and comedic performances by top comedians. Get ready for a night of non-stop laughter.",
+        "image": "https://i.ibb.co/tpn51hh/Screenshot-88.png",
+        "organizer": "Comedy Central",
+        "rating": 4.6
+    },
+    {
+        "id": 5,
+        "title": "Sports Events",
+        "description": "Cheer for your favorite teams and athletes at thrilling sports events. Witness intense competitions and unforgettable sporting moments. Feel the energy of the crowd.",
+        "image": "https://i.ibb.co/Njq8Swp/Screenshot-76.png",
+        "organizer": "Sports Mania",
+        "rating": 4.9
+    },
+    {
+        "id": 6,
+        "title": "Tech and Innovation Conferences",
+        "description": "Explore the latest in technology and innovation at our conferences. Connect with industry experts and stay updated on cutting-edge trends.These immersive events offer a unique opportunity to delve into the latest advancements shaping our world.",
+        "image": "https://i.ibb.co/PG93LKz/Screenshot-77.png",
+        "organizer": "Tech Innovators",
+        "rating": 5
+    }
+]

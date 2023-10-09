@@ -1,109 +1,74 @@
-import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
-import auth from "../../firebase/firebase.config";
-import { useState } from "react";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from "react-router-dom";
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProvider';
+
 
 const Register = () => {
-    const [registerError, setRegisterError] = useState('');
-    const [success, setSuccess] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
+     const { createUser } = useContext(AuthContext);
 
-    const handleRegister = e => {
+    const handleRegister = e =>{
         e.preventDefault();
-        const name = e.target.name.value;
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        const accepted = e.target.terms.checked;
-        console.log(name, email, password, accepted);
-
-        // reset error and success
-        setRegisterError('');
-        setSuccess('');
-
-
-        if (password.length < 6) {
-            setRegisterError('Password should be at least 6 characters or longer');
-            return;
-        }
-        else if (!/[A-Z]/.test(password)) {
-            setRegisterError('Your password should have at least one upper case characters.')
-            return;
-        }
-        else if(!accepted){
-            setRegisterError('Please accept our terms and conditions!')
-            return;
-        }
-
-
-
-        // create user
-        createUserWithEmailAndPassword(auth, email, password)
-            .then(result => {
-                console.log(result.user);
-                setSuccess('User Created Successfully.')
-
-                // update profile
-                updateProfile(result.user, {
-                    displayName: name, 
-                    photoURL: "https://example.com/jane-q-user/profile.jpg"
-                })
-                .then( () => console.log('profile updated'))
-                .catch()
-
-                // send verification email: 
-                sendEmailVerification(result.user)
-                .then( () =>{
-                    alert('Please check your email and verify your account')
-                })
-
-            })
-            .catch(error => {
-                console.error(error);
-                setRegisterError(error.message);
-            })
+        console.log(e.currentTarget);
+        const form = new FormData(e.currentTarget);
+        const name = form.get('name');
+        const photoUrl = form.get('photoUrl');
+        const email = form.get('email');
+        const password = form.get('password');
+        console.log(name,photoUrl,email,password);
+    
+        
+    createUser(email,password)
+    .then(result => {
+        console.log(result.user)
+    })
+    .catch(error => {
+        console.log(error)
+    })
+    
     }
-
     return (
-        <div className="">
-            <div className="mx-auto md:w-1/2">
-                <h2 className="text-3xl mb-8">Please Register</h2>
-                <form onSubmit={handleRegister}>
-                    <input className="mb-4 w-full  py-2 px-4" type="text" name="name" placeholder="Your Name" id="" required />
-                    <br />
-                    <input className="mb-4 w-full  py-2 px-4" type="email" name="email" placeholder="Email Address" id="" required />
-                    <br />
-                    <div className="mb-4 relative border">
-                        <input
-                            className="w-full py-2 px-4"
-                            type={showPassword ? "text" : "password"}
-                            name="password"
-                            placeholder="Password"
-                            id="" required />
-                        <span className="absolute top-3 right-2" onClick={() => setShowPassword(!showPassword)}>
-                            {
-                                showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>
-                            }
-
-                        </span>
-                    </div>
-                    <br />
-                    <div className="mb-2">
-                        <input type="checkbox" name="terms" id="terms" />
-                        <label className="ml-2" htmlFor="terms">Accept our <a href="">Terms and Conditions</a></label>
-                    </div>
-                    <br />
-                    <input className="btn btn-secondary mb-4 w-full" type="submit" value="Register" />
-                </form>
-                {
-                    registerError && <p className="text-red-700">{registerError}</p>
-                }
-                {
-                    success && <p className="text-green-600">{success}</p>
-                }
-                <p>Already have an account? Please <Link to="/login">Login</Link></p>
-            </div>
+        <div>
+            
+<h1 className='text-center text-4xl font-semibold mt-5'>Please Register!</h1>
+<form onSubmit={handleRegister} className="card-body  md:w-3/5 lg:w-1/2 mx-auto">
+        <div className="form-control">
+          
+          <div className="form-control">
+          <label className="label">
+            <span className="label-text">Name</span>
+          </label>
+          <input type="text" required name='name' placeholder="Name" className="input input-bordered"  />
         </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Photo-Url</span>
+          </label>
+          <input type="text" required name='photoUrl' placeholder="Photo Url" className="input input-bordered"  />
+          <label className="label">
+          <span className="label-text">Email</span>
+          </label>
+        </div>
+
+
+          <input type="email" required name='email' placeholder="email" className="input input-bordered"  />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Password</span>
+          </label>
+          <input type="password" required name='password' placeholder="password" className="input input-bordered"  />
+          <label className="label">
+            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+          </label>
+        </div>
+
+        <div className="form-control mt-6">
+          <button className="btn btn-primary">Login</button>
+        </div>
+      </form>
+     <p className='text-center mt-4'>Already Have an Account?<Link className='text-blue-600' to = '/login'>Login</Link></p>
+
+</div>
     );
 };
 
